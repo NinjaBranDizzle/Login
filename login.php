@@ -19,21 +19,20 @@
 ?>
 <body>
    <div id="login">
-   	<form method="post" action="">
-   		<h2>Login <small>enter your credentials</small></h2>
-   		<p>
-   			<label for="username">Username: </label>
-   			<input type="text" name="username" />
-   		</p>
-   		<p>
-   			<label for="pwd">Password: </label>
-   			<input type="password" name="pwd" />
-   		</p>
-   		<p>
-   			<input type="submit" id="submit" value="Login" name="submit" />
-   		</p>
-   	</form>
-   	<?php if(isset($response)) echo "<h4 class='alert'>". $response  ."</h4>"; ?>
+      <form method="post" action="">
+         <h1>Login</h1>
+         <p>
+            <input type="text" placeholder="Username" name="username" />
+         </p>
+         <p>
+            <input type="password" placeholder="Password" name="pwd" />
+         </p>
+         <p>
+            <input type="submit" id="submit" class="btn btn-primary btn-sm" value="Login" name="submit" />
+         </p>
+      </form>
+      <p><a href="register.php">Register</a></p>
+      <?php if(isset($response)) echo "<h4 class='alert'>". $response  ."</h4>"; ?>
    </div><!-- /login-->
 </body>
 </html>

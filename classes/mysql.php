@@ -22,4 +22,30 @@ class Mysql{
 			}
 		}
 	}
+
+	function check_Username_Existance($un){
+		$query = "SELECT username FROM users WHERE username = ?";
+		if($stmt = $this->conn->prepare($query)){
+			$stmt->bind_param('s',$un);
+			$stmt->execute();
+
+			if($stmt->fetch()){
+				$stmt->close();
+				return true;
+			}
+		}
+	}
+
+	function register_User($un, $pwd){
+		$query = "INSERT INTO users (username, password) VALUES(?,?)";
+		if($stmt = $this->conn->prepare($query)){
+			$stmt->bind_param('ss',$un,$pwd);
+			$stmt->execute();
+
+			if($stmt->fetch()){
+				$stmt->close();
+				return true;
+			}
+		}
+	}
 }

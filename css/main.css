@@ -6,4 +6,23 @@
  * ===========================================================
  */
  
- 
+ #login, .registerWrapper {
+    width: 300px;
+    margin: 10px auto;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #999;
+}
+
+#login input, .registerWrapper input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
+#login #submit {
+    font-size: 18px;
+}

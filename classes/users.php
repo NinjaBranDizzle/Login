@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'classes/mysql.php';
 
 class User{
@@ -11,7 +11,7 @@ class User{
 		if($ensure_credentials){
 			$_SESSION['status'] = 'authorized';
 			header('location: index.php');
-		}else return "Please enter a correct username and password";
+		}else return "Failed login, please try again"; 
 	}
 
 	function log_User_Out(){
@@ -26,10 +26,52 @@ class User{
 	}
 
 	function confirm_User(){
-		session_start();
 		if($_SESSION['status'] != 'authorized'){
 			header('location: login.php');
 		}
+	}
+
+	function register_User($un, $pwd, $rpwd){
+		$mysql = New Mysql();
+		$username_existance = $mysql->check_Username_Existance($un);
+		if($username_existance){
+			return "Username taken, please try again";
+		}else
+			{	
+				//Check for existance
+				if($un&&$pwd&&$rpwd)
+				{
+					//Check to see if passwords match
+					if($pwd==$rpwd)
+					{
+						//Check string lengths
+						if(strlen($pwd)>25||strlen($pwd)<6)
+						{
+							return "Your password must be between 6 and 25 characters long";
+						}else
+						{
+							//Encrypt password
+							$pwd = md5($pwd);
+							//Register User
+							$mysql = New Mysql();
+							$registerResponse = $mysql->register_User($un, $pwd);
+							if($registerResponse){
+								return "Successfully Registered!";
+							}else
+								return "Successfully Registered!<br /><a href='login.php'>Login</a>";
+								
+						}
+					}	
+					else
+					{
+						return "Your passwords do not match";
+					}
+				}
+				else
+				{
+					return "Please fill in <b>ALL</b> fields";
+				}
+			}
 	}
 }
 
